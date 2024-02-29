@@ -5,9 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/Maze.unity
+    guid: 31a24b85bb0a736438b7d9a706778d13
+  - enabled: 0
+    path: Assets/Samples/XR Interaction Toolkit/2.5.3/Starter Assets/DemoScene.unity
+    guid: 319dafa5c80f29f428dc1e0d03f04177
+  - enabled: 1
+    path: Assets/Scenes/MazeGame.unity
+    guid: bf092866464c05b4b96b7a0a699104d7
   m_configObjects:
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 420d2da58e9f88b4ca40fbb71c2618de, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f6c73325a5ff99e42a3da870b5e763c2, type: 2}

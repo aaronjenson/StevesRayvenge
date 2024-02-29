@@ -138,9 +138,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   bundleVersion: 0.1
   preloadedAssets:
-  - {fileID: 11400000, guid: c677e5c4eb85b7849a8da406775c299d, type: 2}
   - {fileID: -6797233976485994948, guid: f6c73325a5ff99e42a3da870b5e763c2, type: 2}
-  - {fileID: 11400000, guid: 420d2da58e9f88b4ca40fbb71c2618de, type: 2}
   - {fileID: 5568451709740122351, guid: 12f337578794a1147aad72daae642ea4, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -161,7 +159,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.DefaultCompany.StevesRayvenge
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -847,7 +846,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 2
+  activeInputHandler: 1
   windowsGamepadBackendHint: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
