@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Serialization;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -17,6 +18,7 @@ public class NewBehaviourScript : MonoBehaviour
     private InputDevice rightController;
     private bool rayGenerated;
     private List<TeleportationArea> _teleportationAreas;
+    public PlayableDirector cutScene;
 
     void Start()
     {
@@ -62,6 +64,7 @@ public class NewBehaviourScript : MonoBehaviour
         _teleportationAreas.ForEach(area => area.enabled = true);
         enableOnGameStart.ForEach(obj => obj.SetActive(true));
         disableOnGameStart.ForEach(obj => obj.SetActive(false));
+        cutScene.Play();
     }
 
     public void EnableRayShooting()
