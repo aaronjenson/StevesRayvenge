@@ -6,6 +6,8 @@ TagManager:
   tags:
   - unselected
   - selected
+  - Ray
+  - Steve
   layers:
   - Default
   - TransparentFX
