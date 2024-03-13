@@ -17,7 +17,7 @@ public class SteveScript : MonoBehaviour
     public TMP_Text ScoreText;
     private HashSet<GameObject> hitRays;
     private Vector3 startLocation;
-    private int randomWalkRange = 10;
+    private int randomWalkRange = 15;
     private float timeUntilNewLocation;
     private float speed = 2f;
     private bool vulnerable;
@@ -38,7 +38,7 @@ public class SteveScript : MonoBehaviour
     private float gameStartedTimer = 21;
     private bool buttonClicked;
     private bool gameStarted;
-    private float attackCooldown = 0.7f;
+    private float attackCooldown = 0.5f;
     private float attackTimer;
     public GameObject attackPrefab;
     private int winScoreBonus = 1000;
@@ -170,5 +170,9 @@ public class SteveScript : MonoBehaviour
     public void BecomeVulnerable() {
         vulnerable = true;
         SetMaterial(vulnerableMaterial);
+    }
+
+    public bool GetVulnerability() {
+        return vulnerable;
     }
 }

@@ -17,7 +17,8 @@ public class BugScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((gameObject.transform.position - player.transform.position).magnitude < pickupDistance) {
+        if ((gameObject.transform.position - player.transform.position).magnitude < pickupDistance
+                && steveScript.GetVulnerability()) {
             steveScript.BecomeVulnerable();
             Destroy(gameObject);
         }
