@@ -15,6 +15,8 @@ public class PuzzleController : MonoBehaviour
 
     public GameObject puzzle;
 
+    public int code;
+
     private GameObject[] buttons;
     private bool isSolved;
     private string[] answer;
@@ -23,7 +25,8 @@ public class PuzzleController : MonoBehaviour
     void Start()
     {
         buttons = new GameObject[8]{button1, button2, button3, button4, button5, button6, button7, button8};
-        answer = new string[8] {"unselected", "selected", "unselected", "unselected", "unselected", "unselected", "unselected", "unselected"};
+        answer = new string[8] {"unselected", "unselected", "unselected", "unselected", "unselected", "unselected", "unselected", "unselected"};
+        answer[code] = "selected";
         isSolved = false;
     }
 

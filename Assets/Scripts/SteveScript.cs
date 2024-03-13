@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class SteveScript : MonoBehaviour
 {
-    public AudioSource audioSource;
     private int HP = 5;
     public TMP_Text HPText;
     private int score = 0;
@@ -43,6 +42,12 @@ public class SteveScript : MonoBehaviour
     private float attackTimer;
     public GameObject attackPrefab;
     private int winScoreBonus = 1000;
+
+    public AudioSource onHit1;
+    public AudioSource passiveAudio1;
+    public AudioSource passiveAudio2;
+    public AudioSource introAudio;
+    public AudioSource end;
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +117,12 @@ public class SteveScript : MonoBehaviour
 
     void SpawnAttack() {
         Instantiate(attackPrefab, GenerateLocationInRange(), Quaternion.identity);
+        float r = UnityEngine.Random.Range(0f, 1f);
+        if (r < 0.001) {
+            passiveAudio1.Play();
+        } else if (r < 0.002) {
+            passiveAudio2.Play();
+        }
     }
 
     void GetNewLocation() {
@@ -138,7 +149,7 @@ public class SteveScript : MonoBehaviour
             vulnerabilityTimer = invulerabilityTime;
             SetMaterial(invulnerableMaterial);
             addScore(hitScoreBonus);
-            audioSource.Play();
+            onHit1.Play();
             if (HP <= 0) {
                 BossDefeated();
             }
@@ -149,6 +160,7 @@ public class SteveScript : MonoBehaviour
         defeated = true;
         vulnerabilityTimer = 999999;
         addScore(winScoreBonus);
+        end.Play();
         timeUntilNewLocation = 999999;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = gameObject.transform.forward;
