@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1146,6 +1146,10 @@ PrefabInstance:
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1448185895748059789, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2563463801337956185, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: m_Name
       value: Puzzle (2)
@@ -1568,7 +1572,7 @@ PrefabInstance:
       objectReference: {fileID: 1164798502}
     - target: {fileID: 5530230429822266631, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: code
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5783563704097419915, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.size
@@ -5533,6 +5537,10 @@ PrefabInstance:
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1448185895748059789, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2563463801337956185, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: m_Name
       value: Puzzle (1)
@@ -5951,7 +5959,7 @@ PrefabInstance:
       objectReference: {fileID: 1164798502}
     - target: {fileID: 5530230429822266631, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: code
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5783563704097419915, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.size
@@ -14477,6 +14485,10 @@ PrefabInstance:
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1448185895748059789, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2563463801337956185, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: m_Name
       value: Puzzle
@@ -14895,7 +14907,7 @@ PrefabInstance:
       objectReference: {fileID: 1164798502}
     - target: {fileID: 5530230429822266631, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: code
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5783563704097419915, guid: c35e9443553dbb94cbee7fced7f652d5, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.size
