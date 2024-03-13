@@ -49,7 +49,6 @@ public class SteveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thatsPrettyCoolAudio.Play();
         attackTimer = 0;
         gameStarted = false;
         buttonClicked = false;
@@ -91,7 +90,7 @@ public class SteveScript : MonoBehaviour
         }
         if (gameStarted) {
             attackTimer += Time.deltaTime;
-            if (attackTimer > attackCooldown) {
+            if (!defeated && attackTimer > attackCooldown) {
                 SpawnAttack();
                 attackTimer = 0;
             }
