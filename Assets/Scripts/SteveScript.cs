@@ -22,7 +22,7 @@ public class SteveScript : MonoBehaviour
     private float speed = 2f;
     private bool vulnerable;
     private float vulnerabilityTimer;
-    private float attackCooldown = 5;
+    private float invulerabilityTime = 999999;
     public Material vulnerableMaterial;
     public Material invulnerableMaterial;
     private Rigidbody rb;
@@ -38,10 +38,15 @@ public class SteveScript : MonoBehaviour
     private float gameStartedTimer = 21;
     private bool buttonClicked;
     private bool gameStarted;
+    private float attackCooldown = 0.7f;
+    private float attackTimer;
+    public GameObject attackPrefab;
+    private int winScoreBonus = 1000;
 
     // Start is called before the first frame update
     void Start()
     {
+        attackTimer = 0;
         gameStarted = false;
         buttonClicked = false;
         startButton.onClick.AddListener(ButtonClicked);
@@ -66,8 +71,6 @@ public class SteveScript : MonoBehaviour
         SetMaterial(invulnerableMaterial);
     }
 
-
-
     // Update is called once per frame
     void Update()
     {
@@ -83,6 +86,11 @@ public class SteveScript : MonoBehaviour
             }
         }
         if (gameStarted) {
+            attackTimer += Time.deltaTime;
+            if (attackTimer > attackCooldown) {
+                SpawnAttack();
+                attackTimer = 0;
+            }
             timeUntilNewLocation -= Time.deltaTime;
             if (timeUntilNewLocation < 0) {
                 GetNewLocation();
@@ -101,13 +109,21 @@ public class SteveScript : MonoBehaviour
         }
     }
 
+    void SpawnAttack() {
+        Instantiate(attackPrefab, GenerateLocationInRange(), Quaternion.identity);
+    }
+
     void GetNewLocation() {
-        Vector3 newLocation = startLocation +
-            new Vector3(UnityEngine.Random.Range(-randomWalkRange,randomWalkRange),
-            0, UnityEngine.Random.Range(-randomWalkRange,randomWalkRange));
+        Vector3 newLocation = GenerateLocationInRange();
         float distance = (newLocation - gameObject.transform.position).magnitude;
         timeUntilNewLocation = distance/speed;
         rb.velocity = (newLocation - gameObject.transform.position).normalized * speed;
+    }
+
+    Vector3 GenerateLocationInRange() {
+        return startLocation +
+            new Vector3(UnityEngine.Random.Range(-randomWalkRange,randomWalkRange),
+            0, UnityEngine.Random.Range(-randomWalkRange,randomWalkRange));
     }
 
     void OnTriggerStay(Collider other)
@@ -118,10 +134,9 @@ public class SteveScript : MonoBehaviour
             HP -= 1;
             HPText.SetText("HP: " + HP);
             vulnerable = false;
-            vulnerabilityTimer = attackCooldown;
+            vulnerabilityTimer = invulerabilityTime;
             SetMaterial(invulnerableMaterial);
-            score += hitScoreBonus;
-            ScoreText.SetText("Score: " + score);
+            addScore(hitScoreBonus);
             if (HP <= 0) {
                 BossDefeated();
             }
@@ -131,8 +146,7 @@ public class SteveScript : MonoBehaviour
     void BossDefeated() {
         defeated = true;
         vulnerabilityTimer = 999999;
-        score += 1000;
-        ScoreText.SetText("Score: " + score);
+        addScore(winScoreBonus);
         timeUntilNewLocation = 999999;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = gameObject.transform.forward;
@@ -146,5 +160,15 @@ public class SteveScript : MonoBehaviour
 
     void ButtonClicked() {
         buttonClicked = true;
+    }
+
+    public void addScore(int scoreToAdd) {
+        score += scoreToAdd;
+        ScoreText.SetText("Score: " + score);
+    }
+
+    public void BecomeVulnerable() {
+        vulnerable = true;
+        SetMaterial(vulnerableMaterial);
     }
 }
