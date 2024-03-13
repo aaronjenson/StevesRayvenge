@@ -31,6 +31,7 @@ public class BossAttackScript : MonoBehaviour
             Vector2 attackLocation2D = new Vector2(gameObject.transform.position.x, gameObject.transform.position.z);
             if ((playerLocation2D - attackLocation2D).magnitude < gameObject.transform.localScale.x/2) {
                 steveScript.addScore(-200);
+                steveScript.PlayThatsPrettyCool();
             }
             Destroy(gameObject);
         }

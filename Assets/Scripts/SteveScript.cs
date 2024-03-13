@@ -9,7 +9,9 @@ using UnityEngine.UI;
 
 public class SteveScript : MonoBehaviour
 {
-    public AudioSource audioSource;
+    public AudioSource thatsNotGoodAudio;
+    public AudioSource IhopeYouEnjoyedAudio;
+    public AudioSource thatsPrettyCoolAudio;
     private int HP = 5;
     public TMP_Text HPText;
     private int score = 0;
@@ -47,6 +49,7 @@ public class SteveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        thatsPrettyCoolAudio.Play();
         attackTimer = 0;
         gameStarted = false;
         buttonClicked = false;
@@ -138,7 +141,9 @@ public class SteveScript : MonoBehaviour
             vulnerabilityTimer = invulerabilityTime;
             SetMaterial(invulnerableMaterial);
             addScore(hitScoreBonus);
-            audioSource.Play();
+            if (HP > 0) {
+                thatsNotGoodAudio.Play();
+            }
             if (HP <= 0) {
                 BossDefeated();
             }
@@ -147,6 +152,7 @@ public class SteveScript : MonoBehaviour
 
     void BossDefeated() {
         defeated = true;
+        IhopeYouEnjoyedAudio.Play();
         vulnerabilityTimer = 999999;
         addScore(winScoreBonus);
         timeUntilNewLocation = 999999;
@@ -176,5 +182,9 @@ public class SteveScript : MonoBehaviour
 
     public bool GetVulnerability() {
         return vulnerable;
+    }
+
+    public void PlayThatsPrettyCool() {
+        thatsPrettyCoolAudio.Play();
     }
 }
