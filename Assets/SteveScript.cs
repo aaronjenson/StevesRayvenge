@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.Utilities;
+using UnityEngine.UI;
 
 public class SteveScript : MonoBehaviour
 {
@@ -33,18 +34,24 @@ public class SteveScript : MonoBehaviour
     public GameObject rightLeg;
     private List<GameObject> bodyParts;
     private bool defeated;
+    public Button startButton;
+    private float gameStartedTimer = 21;
+    private bool buttonClicked;
+    private bool gameStarted;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameStarted = false;
+        buttonClicked = false;
+        startButton.onClick.AddListener(ButtonClicked);
         defeated = false;
-        vulnerable = true;
+        vulnerable = false;
         HPText.SetText("HP: " + HP);
         ScoreText.SetText("Score: " + score);
         hitRays = new HashSet<GameObject>();
         startLocation = gameObject.transform.position + Vector3.zero;
         rb = GetComponent<Rigidbody>();
-        GetNewLocation();
         bodyParts = new List<GameObject>
         {
             head,
@@ -54,24 +61,42 @@ public class SteveScript : MonoBehaviour
             leftLeg,
             rightLeg
         };
+        ScoreText.alpha = 0;
+        HPText.alpha = 0;
+        SetMaterial(invulnerableMaterial);
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
-        timeUntilNewLocation -= Time.deltaTime;
-        if (timeUntilNewLocation < 0) {
-            GetNewLocation();
+        if (!gameStarted && buttonClicked) {
+            gameStartedTimer -= Time.deltaTime;
+            if (gameStartedTimer < 0) {
+                gameStarted = true;
+                vulnerable = true;
+                SetMaterial(vulnerableMaterial);
+                GetNewLocation();
+                ScoreText.alpha = 1;
+                HPText.alpha = 1;
+            }
         }
-        vulnerabilityTimer -= Time.deltaTime;
-        if (vulnerabilityTimer < 0) {
-            vulnerable = true;
-            SetMaterial(vulnerableMaterial);
-        }
-        if (defeated) {
-            defeatedRotationTimer += Time.deltaTime;
-            if (defeatedRotationTimer > Math.PI/2) {
-                rb.angularVelocity = Vector3.zero;
+        if (gameStarted) {
+            timeUntilNewLocation -= Time.deltaTime;
+            if (timeUntilNewLocation < 0) {
+                GetNewLocation();
+            }
+            vulnerabilityTimer -= Time.deltaTime;
+            if (vulnerabilityTimer < 0) {
+                vulnerable = true;
+                SetMaterial(vulnerableMaterial);
+            }
+            if (defeated) {
+                defeatedRotationTimer += Time.deltaTime;
+                if (defeatedRotationTimer > Math.PI/2) {
+                    rb.angularVelocity = Vector3.zero;
+                }
             }
         }
     }
@@ -117,5 +142,9 @@ public class SteveScript : MonoBehaviour
         foreach (GameObject part in bodyParts) {
             part.GetComponent<MeshRenderer>().material = material;
         }
+    }
+
+    void ButtonClicked() {
+        buttonClicked = true;
     }
 }
