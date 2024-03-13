@@ -10,6 +10,10 @@ public class SteveScript : MonoBehaviour
 {
     private int HP = 5;
     public TMP_Text HPText;
+    private int score = 0;
+    private int hitScoreBonus = 200;
+    private float defeatedRotationTimer = 0;
+    public TMP_Text ScoreText;
     private HashSet<GameObject> hitRays;
     private Vector3 startLocation;
     private int randomWalkRange = 10;
@@ -28,12 +32,15 @@ public class SteveScript : MonoBehaviour
     public GameObject leftLeg;
     public GameObject rightLeg;
     private List<GameObject> bodyParts;
+    private bool defeated;
 
     // Start is called before the first frame update
     void Start()
     {
+        defeated = false;
         vulnerable = true;
         HPText.SetText("HP: " + HP);
+        ScoreText.SetText("Score: " + score);
         hitRays = new HashSet<GameObject>();
         startLocation = gameObject.transform.position + Vector3.zero;
         rb = GetComponent<Rigidbody>();
@@ -61,6 +68,12 @@ public class SteveScript : MonoBehaviour
             vulnerable = true;
             SetMaterial(vulnerableMaterial);
         }
+        if (defeated) {
+            defeatedRotationTimer += Time.deltaTime;
+            if (defeatedRotationTimer > Math.PI/2) {
+                rb.angularVelocity = Vector3.zero;
+            }
+        }
     }
 
     void GetNewLocation() {
@@ -82,7 +95,22 @@ public class SteveScript : MonoBehaviour
             vulnerable = false;
             vulnerabilityTimer = attackCooldown;
             SetMaterial(invulnerableMaterial);
+            score += hitScoreBonus;
+            ScoreText.SetText("Score: " + score);
+            if (HP <= 0) {
+                BossDefeated();
+            }
         }
+    }
+
+    void BossDefeated() {
+        defeated = true;
+        vulnerabilityTimer = 999999;
+        score += 1000;
+        ScoreText.SetText("Score: " + score);
+        timeUntilNewLocation = 999999;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = gameObject.transform.forward;
     }
 
     void SetMaterial(Material material) {
