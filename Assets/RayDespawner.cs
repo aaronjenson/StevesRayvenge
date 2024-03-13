@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RayDespawner : MonoBehaviour
 {
-    public float despawnTime = 3.0f;
+    private float despawnTime = 2f;
+    private float fullOpacityTime = 1f;
     private float time = 0;
 
     // Start is called before the first frame update
@@ -20,5 +21,20 @@ public class RayDespawner : MonoBehaviour
         if (time > despawnTime) {
             Destroy(gameObject);
         }
+        float alpha = 0f;
+        if (time < fullOpacityTime) {
+            alpha = 1;
+        } else {
+            float slope = -1 / (despawnTime - fullOpacityTime);
+            alpha = (time - fullOpacityTime) * slope + 1;
+        }
+        ChangeAlpha(gameObject.GetComponent<Renderer>().material, alpha);
+    }
+
+    void ChangeAlpha(Material mat, float alphaVal)
+    {
+        Color oldColor = mat.color;
+        Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, alphaVal);
+        mat.SetColor("_Color", newColor);
     }
 }
