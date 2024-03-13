@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 public class SteveScript : MonoBehaviour
 {
+    public AudioSource thatsNotGoodAudio;
+    public AudioSource IhopeYouEnjoyedAudio;
+    public AudioSource thatsPrettyCoolAudio;
     private int HP = 5;
     public TMP_Text HPText;
     private int score = 0;
@@ -43,11 +46,8 @@ public class SteveScript : MonoBehaviour
     public GameObject attackPrefab;
     private int winScoreBonus = 1000;
 
-    public AudioSource onHit1;
     public AudioSource passiveAudio1;
     public AudioSource passiveAudio2;
-    public AudioSource introAudio;
-    public AudioSource end;
 
     // Start is called before the first frame update
     void Start()
@@ -93,7 +93,7 @@ public class SteveScript : MonoBehaviour
         }
         if (gameStarted) {
             attackTimer += Time.deltaTime;
-            if (attackTimer > attackCooldown) {
+            if (!defeated && attackTimer > attackCooldown) {
                 SpawnAttack();
                 attackTimer = 0;
             }
@@ -149,7 +149,9 @@ public class SteveScript : MonoBehaviour
             vulnerabilityTimer = invulerabilityTime;
             SetMaterial(invulnerableMaterial);
             addScore(hitScoreBonus);
-            onHit1.Play();
+            if (HP > 0) {
+                thatsNotGoodAudio.Play();
+            }
             if (HP <= 0) {
                 BossDefeated();
             }
@@ -158,9 +160,9 @@ public class SteveScript : MonoBehaviour
 
     void BossDefeated() {
         defeated = true;
+        IhopeYouEnjoyedAudio.Play();
         vulnerabilityTimer = 999999;
         addScore(winScoreBonus);
-        end.Play();
         timeUntilNewLocation = 999999;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = gameObject.transform.forward;
@@ -188,5 +190,9 @@ public class SteveScript : MonoBehaviour
 
     public bool GetVulnerability() {
         return vulnerable;
+    }
+
+    public void PlayThatsPrettyCool() {
+        thatsPrettyCoolAudio.Play();
     }
 }
