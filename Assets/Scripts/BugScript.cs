@@ -18,7 +18,7 @@ public class BugScript : MonoBehaviour
     void Update()
     {
         if ((gameObject.transform.position - player.transform.position).magnitude < pickupDistance
-                && steveScript.GetVulnerability()) {
+                && !steveScript.GetVulnerability()) {
             steveScript.BecomeVulnerable();
             Destroy(gameObject);
         }

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class SteveScript : MonoBehaviour
 {
+    public AudioSource audioSource;
     private int HP = 5;
     public TMP_Text HPText;
     private int score = 0;
@@ -137,6 +138,7 @@ public class SteveScript : MonoBehaviour
             vulnerabilityTimer = invulerabilityTime;
             SetMaterial(invulnerableMaterial);
             addScore(hitScoreBonus);
+            audioSource.Play();
             if (HP <= 0) {
                 BossDefeated();
             }
