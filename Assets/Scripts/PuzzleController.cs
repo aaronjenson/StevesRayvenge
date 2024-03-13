@@ -21,6 +21,8 @@ public class PuzzleController : MonoBehaviour
     private bool isSolved;
     private string[] answer;
 
+    public AudioSource yay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,7 @@ public class PuzzleController : MonoBehaviour
 
         if (isSolved) {
             puzzle.SetActive(false);
+            yay.Play();
         }
     }
 }
